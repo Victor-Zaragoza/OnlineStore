@@ -1,12 +1,24 @@
 <ion-app>
   <ion-split-pane contentId="main">
     <!--  the side menu  -->
-    <ion-menu contentId="main">
+    <ion-menu contentId="main" menuId="principal">
       <ion-header>
-        <ion-toolbar>
+        <ion-toolbar> 
           <ion-title class="subtitle">Menu</ion-title>
         </ion-toolbar>
       </ion-header>
+      <ion-content>
+          <ion-menu-toggle autoHide="false">
+            <ion-item>
+              <ion-item button="true" detail="true" [routerLink]= "['/set-products']">
+                <ion-label class="regular">
+                  Products Configuration
+                </ion-label>
+                <ion-icon slot="start" name="create-sharp"></ion-icon>
+              </ion-item>
+            </ion-item>
+        </ion-menu-toggle>
+      </ion-content>
     </ion-menu>
   
     <!-- the main content -->
