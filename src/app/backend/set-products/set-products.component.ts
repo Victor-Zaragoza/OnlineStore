@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, MenuController, ToastController } from '@ionic/angular';
 import { Product } from 'src/app/models';
-import { FirestoreService } from 'src/app/sevices/firestore.service';
+import { FirestorageService } from 'src/app/services/firestorage.service';
+import { FirestoreService } from 'src/app/services/firestore.service';
 
 @Component({
   selector: 'app-set-products',
@@ -17,12 +18,15 @@ export class SetProductsComponent implements OnInit {
  enableNewProduct= false;
 
  loading:any;
+
+ showNewImage= '';
+ newFile= '';
  
  private path= 'Products/';
 
   constructor(public menucontroller: MenuController, public firestoreService: FirestoreService,
              public loadingController: LoadingController, public toastController: ToastController,
-             public alertController: AlertController) { }
+             public alertController: AlertController, public firestorageService:FirestorageService) { }
 
   ngOnInit() {
     this.getProducts();
@@ -32,8 +36,12 @@ export class SetProductsComponent implements OnInit {
     this.menucontroller.toggle('principal');
   }
 
-  saveProduct(){
+  async saveProduct(){
     this.presentLoading();
+    const path= 'Products';
+    const name= this.newProduct.name;
+    const res= await this.firestorageService.uploadImage(this.newFile, path, name);
+    this.newProduct.image= res;
     this.firestoreService.createDoc(this.newProduct, this.path, this.newProduct.id).then(res =>{
         this.loading.dismiss();
         this.presentToast("Product Saved", 'success');
@@ -109,6 +117,19 @@ export class SetProductsComponent implements OnInit {
       color: color
     });
     toast.present();
+  }
+
+  async newImage(event:any){
+     console.log(event);
+     if(event.target.files && event.target.files[0]){
+       this.newFile= event.target.files[0];
+       const reader = new FileReader();
+       reader.onload= ((image) =>{
+         this.newProduct.image= image.target.result as string;
+       });
+       reader.readAsDataURL(event.target.files[0]);
+     }
+    // this.saveProduct();
   }
 
 }
