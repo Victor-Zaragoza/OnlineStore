@@ -1,3 +1,17 @@
-<p>
-  home works!
-</p>
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="subtitle ion-text-wrap"> Grocery Store</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)= "openMenu()">
+        <ion-icon slot="icon-only" name="menu-outline" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/profile']" >
+        <ion-icon slot="icon-only" name="person-circle-outline" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>

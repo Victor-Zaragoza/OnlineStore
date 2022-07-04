@@ -6,7 +6,7 @@ import { promise } from 'protractor';
 @Injectable({
   providedIn: 'root'
 })
-export class FirestorageService {
+export class FirestorageService { 
 
   constructor(public storage: AngularFireStorage) { }
 

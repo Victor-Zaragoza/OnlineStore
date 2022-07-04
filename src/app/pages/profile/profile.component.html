@@ -1,0 +1,73 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="subtitle ion-text-wrap"> Grocery Store</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)= "openMenu()">
+        <ion-icon slot="icon-only" name="menu-outline" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <h3 class="subtitle p-3 subtittle">Enter Your Data</h3>
+    
+  <ion-item>
+    <ion-label class="regular" position="floating">
+        Email: 
+    </ion-label>
+    <ion-input [(ngModel)]= "client.email" class="regular" type="text" inputmode="text">
+
+    </ion-input>
+  </ion-item>
+
+
+    <ion-item>
+      <ion-label class="regular" position="floating">
+          Name: 
+      </ion-label>
+      <ion-input [(ngModel)]= "client.name" class="regular" type="text" inputmode="text">
+
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="regular" position="floating">
+          CellPhone: 
+      </ion-label>
+      <ion-input [(ngModel)]= "client.cellPhone" class="regular" type="text" inputmode="numeric">
+
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="regular" position="floating">
+          Reference for the location: 
+      </ion-label>
+      <ion-input [(ngModel)]= "client.reference" class="regular" type="text" inputmode="text">
+
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label class="regular">
+          Image of the location: 
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button>
+          <label for="file-upload"><ion-icon slot="icon-only" name="images-outline"></ion-icon></label>
+          <input id="file-upload" (change)= "newImage($event)" style= "display: none;" type="file" accept="image/*">
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-item>
+      <img class="image" [src]="client.image">
+    </ion-item>
+
+    <ion-button style="margin: 20px" expand="block" (click)= "signIn()">
+      Sign In
+    </ion-button>
+    <ion-button style="margin: 20px" expand="block" (click)= "signOut()">
+      Sign Out
+    </ion-button>
+</ion-content>

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { SetProductsComponent } from './backend/set-products/set-products.component';
 import { HomeComponent } from './pages/home/home.component';
+import { ProfileComponent } from './pages/profile/profile.component';
 
 const routes: Routes = [
   {
@@ -9,6 +10,9 @@ const routes: Routes = [
   },
   {
     path: 'set-products', component: SetProductsComponent
+  },
+  {
+    path: 'profile', component: ProfileComponent
   },
   {
     path: '', component: HomeComponent
