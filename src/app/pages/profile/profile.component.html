@@ -9,23 +9,23 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <h3 class="subtitle p-3 subtittle">Enter Your Data</h3>
+  
     
-  <ion-item>
-    <ion-label class="regular" position="floating">
-        Email: 
-    </ion-label>
-    <ion-input [(ngModel)]= "client.email" class="regular" type="text" inputmode="text">
-
-    </ion-input>
-  </ion-item>
-
-
+  <div *ngIf="!uid.length">
+    <h3 class="subtitle p-3 subtittle">Enter Your Data</h3>
     <ion-item>
+      <ion-label class="regular" position="floating">
+          Email: 
+      </ion-label>
+      <ion-input [(ngModel)]= "client.email" class="regular" type="text" inputmode="text">
+  
+      </ion-input>
+    </ion-item>
+    <ion-item *ngIf="!enableLog">
       <ion-label class="regular" position="floating">
           Name: 
       </ion-label>
-      <ion-input [(ngModel)]= "client.name" class="regular" type="text" inputmode="text">
+      <ion-input name="email" [(ngModel)]= "client.name" class="regular" type="text" inputmode="text">
 
       </ion-input>
     </ion-item>
@@ -34,11 +34,72 @@
       <ion-label class="regular" position="floating">
           CellPhone: 
       </ion-label>
-      <ion-input [(ngModel)]= "client.cellPhone" class="regular" type="text" inputmode="numeric">
+      <ion-input name="cellphone" [(ngModel)]= "client.cellPhone" class="regular" type="text" inputmode="numeric">
 
       </ion-input>
     </ion-item>
 
+    <ion-item *ngIf="!enableLog">
+      <ion-label class="regular" position="floating">
+          Reference for the location: 
+      </ion-label>
+      <ion-input name="reference" [(ngModel)]= "client.reference" class="regular" type="text" inputmode="text">
+
+      </ion-input>
+    </ion-item>
+
+    <ion-item *ngIf="!enableLog">
+      <ion-label class="regular">
+          Image of the location: 
+      </ion-label>
+      <ion-buttons slot="end">
+        <ion-button>
+          <label for="file-upload"><ion-icon slot="icon-only" name="images-outline"></ion-icon></label>
+          <input id="file-upload" (change)= "newImage($event)" style= "display: none;" type="file" accept="image/*">
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+
+    <ion-item *ngIf="!enableLog">
+      <img class="image" [src]="client.image">
+    </ion-item>
+    <ion-button style="margin: 20px" expand="block" (click)= "register()" *ngIf="!enableLog">
+      Register
+    </ion-button>
+    <h6 class=" p-3 subtittle" *ngIf="!enableLog">Already have an acount?</h6>
+    <ion-button style="margin: 20px" expand="block" (click)= "enableLog=true" *ngIf="!enableLog">
+      Log In
+    </ion-button>
+     <ion-button style="margin: 20px" expand="block" (click)= "logIn()" *ngIf="enableLog">
+      Log In
+    </ion-button>
+    <h6 class=" p-3 subtittle" *ngIf="enableLog">Don't have an acount?</h6>
+    <ion-button style="margin: 20px" expand="block" (click)= "enableLog=false" *ngIf="enableLog">
+     Register
+    </ion-button>
+    
+  </div>
+    
+  <div *ngIf="uid.length">
+    <h3 class="subtitle p-3 subtittle">Your Data</h3>
+    <ion-item>
+      <ion-label class="regular">
+          Email: {{client.email}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label class="regular">
+          CellPhone: {{client.cellPhone}}
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label class="regular" position="floating">
+          Name: 
+      </ion-label>
+      <ion-input [(ngModel)]= "client.name" class="regular" type="text" inputmode="text">
+
+      </ion-input>
+    </ion-item>
     <ion-item>
       <ion-label class="regular" position="floating">
           Reference for the location: 
@@ -59,15 +120,18 @@
         </ion-button>
       </ion-buttons>
     </ion-item>
-
     <ion-item>
       <img class="image" [src]="client.image">
     </ion-item>
-
-    <ion-button style="margin: 20px" expand="block" (click)= "signIn()">
-      Sign In
+    
+    <ion-button style="margin: 20px" expand="block" (click)= "saveUser()">
+      Save
     </ion-button>
     <ion-button style="margin: 20px" expand="block" (click)= "signOut()">
       Sign Out
     </ion-button>
+  </div>
+  
+    
+    
 </ion-content>
