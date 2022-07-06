@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { element } from 'protractor';
+import { Observable, Subject, Subscription } from 'rxjs';
+import { ItemcartComponent } from '../components/itemcart/itemcart.component';
 import { Client, Order, Product, ProductOrder } from '../models';
 import { FirebaseauthService } from './firebaseauth.service';
 import { FirestoreService } from './firestore.service';
@@ -11,13 +13,19 @@ import { FirestoreService } from './firestore.service';
 export class CartService {
 
   private order: Order;
+  order$= new Subject<Order>();
   path='cart/';
   uid= '';
   client: Client;
 
+  cartSubscriber: Subscription;
+  clientSubscriber: Subscription;
+
   constructor(public firebaseauthService: FirebaseauthService, public firestoreservice: FirestoreService,
               public router:Router) { 
-    firebaseauthService.stateAuth().subscribe(res =>{
+    
+      this.initCart();
+      firebaseauthService.stateAuth().subscribe(res =>{
       console.log(res);
       if(res !==null){
         this.uid= res.uid;
@@ -35,6 +43,7 @@ export class CartService {
         console.log(res);
         if(res){
           this.order= res;
+          this.order$.next(this.order);
         }
         else{
           this.initCart();
@@ -53,6 +62,7 @@ export class CartService {
       fecha: new Date(),
       score: null
     }
+    this.order$.next(this.order); 
   }
 
   loadClient(){
@@ -64,8 +74,11 @@ export class CartService {
     });
   }
 
-  getCart(){
-    return this.order;
+  getCart(): Observable<Order>{  
+    setTimeout(() => {
+      this.order$.next(this.order);
+    }, 100);  
+    return this.order$.asObservable();
   }
 
   addProduct(product: Product){
@@ -97,7 +110,27 @@ export class CartService {
   }
 
   removeProduct(product:Product){
+    const path= 'Clients/'+ this.uid + '/'+ this.path;
+    let position=0;
 
+    if(this.uid.length){
+      const elment= this.order.products.find((prod, index) =>{
+        position=index;
+        return (prod.product.id === product.id);
+      })
+      if(elment !== undefined){
+        elment.amount--;
+        if(elment.amount===0){
+          this.order.products.splice(position,1);
+        }
+        console.log('remove product: '+ this.order);
+        this.firestoreservice.createDoc(this.order, path, this.uid).then(()=>{
+        console.log("eliminado con exito");
+        });
+      }
+       
+    }
+   
   }
 
   doOrder(){
