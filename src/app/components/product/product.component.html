@@ -1,0 +1,9 @@
+<ion-card>
+  <ion-img class="img-product" [src]="product.image"></ion-img>
+  <ion-item lines="full">
+    <ion-label class="subtittle">{{product.name}}</ion-label>
+  </ion-item>
+  <p class="oldP">${{product.regularPrice}}</p>
+  <p class="price">${{product.discountPrice}}</p>
+  <ion-icon (click)="addCart()" class="icon-product" name="cart-sharp"></ion-icon>
+</ion-card>

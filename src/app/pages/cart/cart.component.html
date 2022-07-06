@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title class="subtitle ion-text-wrap"> Grocery Store</ion-title>
+    <ion-title class="subtitle ion-text-wrap"> Shopping Cart</ion-title>
     <ion-buttons slot="start">
       <ion-button (click)= "openMenu()">
         <ion-icon slot="icon-only" name="menu-outline" color="primary"></ion-icon>
@@ -8,8 +8,8 @@
     </ion-buttons>
 
     <ion-buttons slot="end">
-      <ion-button [routerLink]="['/cart']" >
-        <ion-icon slot="icon-only" name="cart-sharp" color="primary"></ion-icon>
+      <ion-button [routerLink]="['/']" >
+        <ion-icon slot="icon-only" name="storefront-sharp" color="primary"></ion-icon>
       </ion-button>
       <ion-button [routerLink]="['/profile']" >
         <ion-icon slot="icon-only" name="person-circle-outline" color="primary"></ion-icon>
@@ -18,9 +18,11 @@
   </ion-toolbar>
 </ion-header>
 
+
 <ion-content>
-  <div *ngFor="let product of products">
-    <app-product [product]="product"></app-product>
+  <div *ngFor="let product of order.products">
+    <app-itemcart [productOrder]="product"></app-itemcart>
   </div>
 </ion-content>
+
 

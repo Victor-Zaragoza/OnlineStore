@@ -123,7 +123,7 @@ export class ProfileComponent implements OnInit {
      this.suscriberUserInfo= this.firestoreService.getDoc<Client>(path,uid).subscribe(res =>{
         // this.client= res as Client;
         this.client= res;
-     })
+     });
   }
 
   logIn(){

@@ -1,3 +1,4 @@
+import { type } from "os";
 
 export interface Product{
     id: string;
@@ -17,3 +18,20 @@ export interface Client{
     reference: string;
     location: any;
 }
+
+export interface Order{
+    uid: string;
+    client: Client;
+    products: ProductOrder[];
+    totalPrice: number; 
+    status: StatusOrder;
+    fecha: Date;
+    score: number;
+}
+
+export interface ProductOrder{
+    product: Product;
+    amount: number;
+}
+
+export type StatusOrder= 'send' | 'read' | 'on route' | 'delivered';
