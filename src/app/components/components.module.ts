@@ -9,11 +9,7 @@ import { ItemcartComponent } from './itemcart/itemcart.component';
 
 @NgModule({
   declarations: [ ProductComponent,  ItemcartComponent],
-  imports: [
-    CommonModule,
-    IonicModule,
-    RouterModule
-  ],
+  imports: [ CommonModule, IonicModule, RouterModule],
   exports: [ProductComponent,  ItemcartComponent]
 })
 export class ComponentsModule { }

@@ -1,5 +1,3 @@
-import { type } from "os";
-
 export interface Product{
     id: string;
     name: string;
@@ -20,12 +18,12 @@ export interface Client{
 }
 
 export interface Order{
-    uid: string;
+    id: string;
     client: Client;
     products: ProductOrder[];
     totalPrice: number; 
     status: StatusOrder;
-    fecha: Date;
+    date: any;
     score: number;
 }
 

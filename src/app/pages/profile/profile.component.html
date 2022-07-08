@@ -8,9 +8,8 @@
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
-  
-    
+
+<ion-content>    
   <div *ngIf="!uid.length">
     <h3 class="subtitle p-3 subtittle">Enter Your Data</h3>
     <ion-item>
@@ -18,15 +17,14 @@
           Email: 
       </ion-label>
       <ion-input [(ngModel)]= "client.email" class="regular" type="text" inputmode="text">
-  
       </ion-input>
     </ion-item>
+
     <ion-item *ngIf="!enableLog">
       <ion-label class="regular" position="floating">
           Name: 
       </ion-label>
       <ion-input name="email" [(ngModel)]= "client.name" class="regular" type="text" inputmode="text">
-
       </ion-input>
     </ion-item>
 
@@ -35,7 +33,6 @@
           CellPhone: 
       </ion-label>
       <ion-input name="cellphone" [(ngModel)]= "client.cellPhone" class="regular" type="text" inputmode="numeric">
-
       </ion-input>
     </ion-item>
 
@@ -77,7 +74,6 @@
     <ion-button style="margin: 20px" expand="block" (click)= "enableLog=false" *ngIf="enableLog">
      Register
     </ion-button>
-    
   </div>
     
   <div *ngIf="uid.length">
@@ -97,7 +93,6 @@
           Name: 
       </ion-label>
       <ion-input [(ngModel)]= "client.name" class="regular" type="text" inputmode="text">
-
       </ion-input>
     </ion-item>
     <ion-item>
@@ -105,7 +100,6 @@
           Reference for the location: 
       </ion-label>
       <ion-input [(ngModel)]= "client.reference" class="regular" type="text" inputmode="text">
-
       </ion-input>
     </ion-item>
 
@@ -120,6 +114,7 @@
         </ion-button>
       </ion-buttons>
     </ion-item>
+
     <ion-item>
       <img class="image" [src]="client.image">
     </ion-item>
@@ -130,8 +125,5 @@
     <ion-button style="margin: 20px" expand="block" (click)= "signOut()">
       Sign Out
     </ion-button>
-  </div>
-  
-    
-    
+  </div> 
 </ion-content>

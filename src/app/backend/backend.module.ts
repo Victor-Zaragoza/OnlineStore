@@ -7,13 +7,7 @@ import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
-  declarations: [
-    SetProductsComponent
-  ],
-  imports: [
-    CommonModule,
-    IonicModule,
-    FormsModule
-  ]
+  declarations: [ SetProductsComponent],
+  imports: [ CommonModule, IonicModule, FormsModule]
 })
 export class BackendModule { }

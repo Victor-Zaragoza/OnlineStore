@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { element } from 'protractor';
 import { Observable, Subject, Subscription } from 'rxjs';
-import { ItemcartComponent } from '../components/itemcart/itemcart.component';
 import { Client, Order, Product, ProductOrder } from '../models';
 import { FirebaseauthService } from './firebaseauth.service';
 import { FirestoreService } from './firestore.service';
@@ -17,24 +15,19 @@ export class CartService {
   path='cart/';
   uid= '';
   client: Client;
-
   cartSubscriber: Subscription;
   clientSubscriber: Subscription;
 
   constructor(public firebaseauthService: FirebaseauthService, public firestoreservice: FirestoreService,
               public router:Router) { 
-    
       this.initCart();
       firebaseauthService.stateAuth().subscribe(res =>{
-      console.log(res);
-      if(res !==null){
-        this.uid= res.uid;
-        this.loadClient();
-      }
-      else{
-      }
-    });
-    
+        console.log(res);
+        if(res !==null){
+          this.uid= res.uid;
+          this.loadClient();
+        }
+      });
   }
 
   loadCart(){
@@ -48,18 +41,17 @@ export class CartService {
         else{
           this.initCart();
         }
-
     }); 
   }
 
   initCart(){
     this.order={
-      uid: this.uid,
+      id: this.uid,
       client: this.client,
       products: [],
       totalPrice: null,
       status: 'send',
-      fecha: new Date(),
+      date: new Date(),
       score: null
     }
     this.order$.next(this.order); 
@@ -95,7 +87,6 @@ export class CartService {
           product: product,
           amount: 1
         }
-
         this.order.products.push(add);
       }
     }
@@ -103,10 +94,11 @@ export class CartService {
       this.router.navigate(['/profile']);
       return;
     }
+    // this.order$.next(this.order);
     console.log('addorder: '+ this.order);
     this.firestoreservice.createDoc(this.order, path, this.uid).then(()=>{
       console.log("Añadido con exito");
-    });
+    }); 
   }
 
   removeProduct(product:Product){
@@ -117,7 +109,7 @@ export class CartService {
       const elment= this.order.products.find((prod, index) =>{
         position=index;
         return (prod.product.id === product.id);
-      })
+      });
       if(elment !== undefined){
         elment.amount--;
         if(elment.amount===0){
@@ -128,16 +120,14 @@ export class CartService {
         console.log("eliminado con exito");
         });
       }
-       
     }
    
   }
 
-  doOrder(){
-
-  }
-
   clearCart(){
-
+    const path= 'Clients/'+ this.uid+ '/cart/';
+    this.firestoreservice.deleteDoc(path, this.uid).then(()=>{
+      this.initCart();
+    });
   }
 }

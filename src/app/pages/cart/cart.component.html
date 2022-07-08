@@ -18,11 +18,31 @@
   </ion-toolbar>
 </ion-header>
 
-
 <ion-content>
   <div *ngFor="let product of order.products">
     <app-itemcart [productOrder]="product"></app-itemcart>
   </div>
 </ion-content>
+
+<ion-footer>
+  <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="subtitle text-center" style="color: black ; border-right: 1px solid #6c757d" size="auto">
+        Total Products: {{amount}}
+      </ion-col>
+      <ion-col class="subtitle text-center" style="color: black" size="auto">
+        Total Price: ${{total}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="full" style="margin: 20px" expand="block" (click)="newOrder()">
+          Buy All
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  
+</ion-footer>
 
 

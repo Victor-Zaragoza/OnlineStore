@@ -11,18 +11,13 @@ import { FirestoreService } from 'src/app/services/firestore.service';
 })
 export class SetProductsComponent implements OnInit {
  
- newProduct: Product;
-
- products: Product[]= [];
-
- enableNewProduct= false;
-
- loading:any;
-
- showNewImage= '';
- newFile= '';
- 
- private path= 'Products/';
+  newProduct: Product;
+  products: Product[]= [];
+  enableNewProduct= false;
+  loading:any;
+  showNewImage= '';
+  newFile= '';
+  private path= 'Products/';
 
   constructor(public menucontroller: MenuController, public firestoreService: FirestoreService,
              public loadingController: LoadingController, public toastController: ToastController,
@@ -69,9 +64,7 @@ export class SetProductsComponent implements OnInit {
           {
             text: 'Cancel',
             role: 'cancel',
-            handler: () => {  
-
-            }
+            handler: () => {}
           },
           {
             text: 'OK',
@@ -87,7 +80,6 @@ export class SetProductsComponent implements OnInit {
           }
         ]
       });
-  
       await alert.present();   
   }
 
@@ -100,7 +92,7 @@ export class SetProductsComponent implements OnInit {
       discountPrice: null,
       image: '',
       date: new Date()
-   };
+    };
   }
 
   async presentLoading() {
@@ -108,7 +100,6 @@ export class SetProductsComponent implements OnInit {
       cssClass: 'regular',
       message: 'Saving...'  
     });
-    
     await this.loading.present(); 
   }
 
@@ -134,5 +125,4 @@ export class SetProductsComponent implements OnInit {
      }
     // this.saveProduct();
   }
-
 }

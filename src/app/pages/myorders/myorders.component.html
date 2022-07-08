@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="subtitle ion-text-wrap"> My Orders</ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)= "openMenu()">
+        <ion-icon slot="icon-only" name="menu-outline" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/']" >
+        <ion-icon slot="icon-only" name="storefront-sharp" color="primary"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/profile']" >
+        <ion-icon slot="icon-only" name="person-circle-outline" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div class="m-4">
+    <ion-segment mode="ios" (ionChange)="changeSegment($event)" value="New">
+      <ion-segment-button value="New">
+        <ion-label class="regular">New</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="Delivered">
+        <ion-label class="regular">Delivered</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+  <ion-card *ngFor="let order of orders">
+    <ion-item>
+      <ion-label class="regular">
+        Status: " {{order.status}} "
+        <p>Date: {{order.date.seconds | date}}</p>
+      </ion-label>
+    </ion-item>
+    <app-itemcart *ngFor="let product of order.products" [productOrder]="product" [buttons]="false">
+    </app-itemcart>
+  </ion-card>
+</ion-content>

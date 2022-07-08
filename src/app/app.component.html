@@ -7,6 +7,7 @@
           <ion-title class="subtitle">Menu</ion-title>
         </ion-toolbar>
       </ion-header>
+
       <ion-content>
         <ion-menu-toggle autoHide="false">
             <ion-item button="true" detail="true" [routerLink]= "['/']">
@@ -16,6 +17,7 @@
               <ion-icon slot="start" name="storefront-outline"></ion-icon>
             </ion-item>
         </ion-menu-toggle>
+
         <ion-menu-toggle autoHide="false">
           <ion-item button="true" detail="true" [routerLink]= "['/cart']">
             <ion-label class="regular">
@@ -24,6 +26,7 @@
             <ion-icon slot="start" name="cart-sharp"></ion-icon>
           </ion-item>
         </ion-menu-toggle>
+
           <ion-menu-toggle autoHide="false">
               <ion-item button="true" detail="true" [routerLink]= "['/set-products']">
                 <ion-label class="regular">
@@ -31,6 +34,15 @@
                 </ion-label>
                 <ion-icon slot="start" name="create-sharp"></ion-icon>
               </ion-item>
+          </ion-menu-toggle>
+
+          <ion-menu-toggle autoHide="false">
+            <ion-item button="true" detail="true" [routerLink]= "['/my-orders']">
+              <ion-label class="regular">
+                My Orders
+              </ion-label>
+              <ion-icon slot="start" name="bag-handle"></ion-icon>
+            </ion-item>
           </ion-menu-toggle>
       </ion-content>
     </ion-menu>

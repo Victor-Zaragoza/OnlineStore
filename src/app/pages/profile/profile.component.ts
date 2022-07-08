@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
-import { Subscriber, Subscription } from 'rxjs';
+import { Subscription } from 'rxjs';
 import { Client } from 'src/app/models';
 import { FirebaseauthService } from 'src/app/services/firebaseauth.service';
 import { FirestorageService } from 'src/app/services/firestorage.service';
@@ -22,27 +22,23 @@ export class ProfileComponent implements OnInit {
     reference:'',
     location: null
   }
-
   newFile:any;
-
   uid= '';
-
   suscriberUserInfo: Subscription;
-
   enableLog= false;
 
   constructor(public menucontroller: MenuController, public firebaseauthService:FirebaseauthService, 
             public firestorageService:FirestorageService, public firestoreService: FirestoreService) {
-              firebaseauthService.stateAuth().subscribe(res =>{
-                console.log(res);
-                if(res !==null){
-                  this.uid= res.uid;
-                  this.getUserInfo(this.uid);
-                }
-                else{
-                  this.initClient();
-                }
-              });
+    firebaseauthService.stateAuth().subscribe(res =>{
+    console.log(res);
+      if(res !==null){
+        this.uid= res.uid;
+        this.getUserInfo(this.uid);
+      }
+      else{
+        this.initClient();
+      }
+    });
   }
 
   async ngOnInit() {
@@ -85,7 +81,6 @@ export class ProfileComponent implements OnInit {
       email: this.client.email,
       password: this.client.cellPhone
     }
-
     const resp= await this.firebaseauthService.register(credentials.email, credentials.password).catch(error=>{
         console.log("error: "+ error);
     });
@@ -95,8 +90,6 @@ export class ProfileComponent implements OnInit {
  }
 
  async signOut(){
-  // const uid= await this.firebaseauthService.getUid();
-    // console.log(uid);
     this.firebaseauthService.logout();
     this.suscriberUserInfo.unsubscribe();
  }
@@ -110,11 +103,8 @@ export class ProfileComponent implements OnInit {
       this.client.image= res;
     }
     this.firestoreService.createDoc(this.client, path, this.client.uid).then(res =>{
-        console.log("guardado con exito"); 
-         
-    }).catch(error =>{
-      
-    });
+        console.log("guardado con exito");    
+    }).catch(error =>{});
     console.log("guardado");
   }
 

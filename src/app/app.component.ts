@@ -7,6 +7,5 @@ import { FirebaseauthService } from 'src/app/services/firebaseauth.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
-
   constructor(private firebaseauthService:FirebaseauthService) {}
 }

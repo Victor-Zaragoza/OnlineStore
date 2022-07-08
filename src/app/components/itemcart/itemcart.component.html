@@ -7,7 +7,7 @@
       <ion-col size="8">
         <ion-item>
           <ion-label class="regular ion-text-wrap">{{productOrder.product.name}}</ion-label>
-          <ion-buttons slot="end">
+          <ion-buttons slot="end" *ngIf="buttons==true">
             <ion-button class="icon-add" (click)="addCart()">
               <ion-icon slot="icon-only" name="add"></ion-icon>
             </ion-button>

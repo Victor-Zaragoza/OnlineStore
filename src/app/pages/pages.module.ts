@@ -7,8 +7,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { FormsModule } from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
 import { CartComponent } from './cart/cart.component';
-import { ItemcartComponent } from '../components/itemcart/itemcart.component';
-
+import { MyordersComponent } from './myorders/myorders.component';
 
 
 @NgModule({
@@ -16,7 +15,7 @@ import { ItemcartComponent } from '../components/itemcart/itemcart.component';
     HomeComponent,
     ProfileComponent,
     CartComponent,
-    // ItemcartComponent
+    MyordersComponent
   ],
   imports: [
     CommonModule,
@@ -24,7 +23,6 @@ import { ItemcartComponent } from '../components/itemcart/itemcart.component';
     RouterModule,
     FormsModule,
     ComponentsModule
-
   ]
 })
 export class PagesModule { }

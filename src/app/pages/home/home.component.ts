@@ -8,6 +8,7 @@ import { FirestoreService } from 'src/app/services/firestore.service';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
+
 export class HomeComponent implements OnInit {
 
   private path= 'Products/';
