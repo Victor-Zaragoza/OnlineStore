@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 import { ComponentsModule } from '../components/components.module';
 import { CartComponent } from './cart/cart.component';
 import { MyordersComponent } from './myorders/myorders.component';
+import { OrdersComponent } from './orders/orders.component';
+import { GooglemapsComponent } from '../googlemaps/googlemaps.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { MyordersComponent } from './myorders/myorders.component';
     HomeComponent,
     ProfileComponent,
     CartComponent,
-    MyordersComponent
+    MyordersComponent,
+    OrdersComponent,
+    GooglemapsComponent
   ],
   imports: [
     CommonModule,

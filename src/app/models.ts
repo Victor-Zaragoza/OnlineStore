@@ -14,7 +14,10 @@ export interface Client{
     cellPhone: string;
     image: string;
     reference: string;
-    location: any;
+    location: {
+        lat:number;
+        lng:number;
+    };
 }
 
 export interface Order{

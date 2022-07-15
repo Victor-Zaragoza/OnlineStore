@@ -95,6 +95,16 @@
       <ion-input [(ngModel)]= "client.name" class="regular" type="text" inputmode="text">
       </ion-input>
     </ion-item>
+
+    <ion-item (click)="addDirection()">
+      <ion-label class="regular">Location</ion-label>
+      <ion-buttons slot="end">
+        <ion-button>
+          <ion-icon slot="icon-only" color="danger" name="location"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+    
     <ion-item>
       <ion-label class="regular" position="floating">
           Reference for the location: 
@@ -125,5 +135,5 @@
     <ion-button style="margin: 20px" expand="block" (click)= "signOut()">
       Sign Out
     </ion-button>
-  </div> 
+  </div>
 </ion-content>

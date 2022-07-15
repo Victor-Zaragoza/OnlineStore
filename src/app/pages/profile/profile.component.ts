@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ModalController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
+import { GooglemapsComponent } from 'src/app/googlemaps/googlemaps.component';
 import { Client } from 'src/app/models';
 import { FirebaseauthService } from 'src/app/services/firebaseauth.service';
 import { FirestorageService } from 'src/app/services/firestorage.service';
@@ -28,8 +29,9 @@ export class ProfileComponent implements OnInit {
   enableLog= false;
 
   constructor(public menucontroller: MenuController, public firebaseauthService:FirebaseauthService, 
-            public firestorageService:FirestorageService, public firestoreService: FirestoreService) {
-    firebaseauthService.stateAuth().subscribe(res =>{
+            public firestorageService:FirestorageService, public firestoreService: FirestoreService, private modalController:ModalController) {
+   
+    this.firebaseauthService.stateAuth().subscribe(res =>{
     console.log(res);
       if(res !==null){
         this.uid= res.uid;
@@ -56,7 +58,8 @@ export class ProfileComponent implements OnInit {
          image: '',
          reference:'',
          location: null
-    }
+    };
+    console.log(this.client);
   }
 
   openMenu(){
@@ -104,7 +107,9 @@ export class ProfileComponent implements OnInit {
     }
     this.firestoreService.createDoc(this.client, path, this.client.uid).then(res =>{
         console.log("guardado con exito");    
-    }).catch(error =>{});
+    }).catch(error =>{
+      console.log("error saveuser");
+    });
     console.log("guardado");
   }
 
@@ -112,7 +117,8 @@ export class ProfileComponent implements OnInit {
      const path= 'Clients';
      this.suscriberUserInfo= this.firestoreService.getDoc<Client>(path,uid).subscribe(res =>{
         // this.client= res as Client;
-        this.client= res;
+        if(res!==undefined)
+          this.client= res;
      });
   }
 
@@ -124,5 +130,30 @@ export class ProfileComponent implements OnInit {
     this.firebaseauthService.login(credentials.email, credentials.password).then(res =>{
       console.log("ingreso con exito");
     });
+  }
+
+  async addDirection(){
+    const location= this.client.location
+    let positionInput={
+      lat: 21.87960105,
+      lng: -102.303282256171
+    };
+    if(location!==null){
+      positionInput=location;
+    }
+    const modalAdd= await this.modalController.create({
+      component: GooglemapsComponent,
+      mode: 'ios',
+      canDismiss: true,
+      componentProps: {position: positionInput}
+    });
+    await modalAdd.present();
+    const {data}= await modalAdd.onWillDismiss();
+   console.log('data', data);
+    if(data){
+      console.log('data ', data);
+      this.client.location= data.pos;
+      console.log('cliente; ', this.client);
+    }
   }
 }

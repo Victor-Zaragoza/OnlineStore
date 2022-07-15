@@ -42,4 +42,27 @@ export class FirestoreService {
       ref.where(param1, condition ,param2));
     return collection.valueChanges();
   }
+
+  getCollectionAll<type>(path, parameter:string, condition:any, search:string, startAt:any){
+    
+    if(startAt==null){
+      startAt= new Date();
+    }
+    const collection=this.database.collectionGroup<type>(path, ref => ref.where(parameter,condition,search)
+              .orderBy('date','desc').limit(2).startAfter(startAt)
+    );
+    return collection.valueChanges();
+  }
+
+  getCollectionParts<type>(path:string, limit:number, startAt:any){
+    if (startAt == null) {
+      startAt = new Date();
+    }
+    const collection = this.database.collection<type>(path, 
+      ref => ref.orderBy('date', 'desc')
+                .limit(limit)
+                .startAfter(startAt)
+      );
+    return collection.valueChanges();
+  }
 }

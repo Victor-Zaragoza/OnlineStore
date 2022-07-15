@@ -18,7 +18,7 @@
             </ion-item>
         </ion-menu-toggle>
 
-        <ion-menu-toggle autoHide="false">
+        <ion-menu-toggle autoHide="false" *ngIf="!admin">
           <ion-item button="true" detail="true" [routerLink]= "['/cart']">
             <ion-label class="regular">
               Shopping Cart
@@ -27,7 +27,7 @@
           </ion-item>
         </ion-menu-toggle>
 
-          <ion-menu-toggle autoHide="false">
+          <ion-menu-toggle autoHide="false" *ngIf="admin">
               <ion-item button="true" detail="true" [routerLink]= "['/set-products']">
                 <ion-label class="regular">
                   Products Configuration
@@ -36,10 +36,18 @@
               </ion-item>
           </ion-menu-toggle>
 
-          <ion-menu-toggle autoHide="false">
+          <ion-menu-toggle autoHide="false" *ngIf="!admin">
             <ion-item button="true" detail="true" [routerLink]= "['/my-orders']">
               <ion-label class="regular">
                 My Orders
+              </ion-label>
+              <ion-icon slot="start" name="bag-handle"></ion-icon>
+            </ion-item>
+          </ion-menu-toggle>
+          <ion-menu-toggle autoHide="false" *ngIf="admin">
+            <ion-item button="true" detail="true" [routerLink]= "['/orders']">
+              <ion-label class="regular">
+                Orders
               </ion-label>
               <ion-icon slot="start" name="bag-handle"></ion-icon>
             </ion-item>

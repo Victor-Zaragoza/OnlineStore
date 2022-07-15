@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)= "modalController.dismiss()">
+        <ion-icon slot="icon-only" name="menu-outline" color="primary"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title class="subtitle ion-text-wrap">Select your location</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div #map class="map"></div>
+  
+  <ion-chip class="mylocation" (click)="mylocation()">
+    <ion-label class="regular">My Current Location</ion-label>
+    <ion-icon name="locate"></ion-icon>
+  </ion-chip>
+  
+  <ion-chip class="accept" (click)="accept()">
+    <ion-label class="regular">Accept</ion-label>
+    <ion-icon name="checkmark"></ion-icon>
+  </ion-chip>
+</ion-content>

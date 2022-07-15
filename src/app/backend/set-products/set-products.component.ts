@@ -16,7 +16,7 @@ export class SetProductsComponent implements OnInit {
   enableNewProduct= false;
   loading:any;
   showNewImage= '';
-  newFile= '';
+  newFile: any;
   private path= 'Products/';
 
   constructor(public menucontroller: MenuController, public firestoreService: FirestoreService,
