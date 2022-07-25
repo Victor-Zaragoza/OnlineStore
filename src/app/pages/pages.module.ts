@@ -9,7 +9,7 @@ import { ComponentsModule } from '../components/components.module';
 import { CartComponent } from './cart/cart.component';
 import { MyordersComponent } from './myorders/myorders.component';
 import { OrdersComponent } from './orders/orders.component';
-import { GooglemapsComponent } from '../googlemaps/googlemaps.component';
+import { GooglemapsModule } from '../googlemaps/googlemaps.module';
 
 
 @NgModule({
@@ -18,15 +18,15 @@ import { GooglemapsComponent } from '../googlemaps/googlemaps.component';
     ProfileComponent,
     CartComponent,
     MyordersComponent,
-    OrdersComponent,
-    GooglemapsComponent
+    OrdersComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
     RouterModule,
     FormsModule,
-    ComponentsModule
+    ComponentsModule,
+    GooglemapsModule
   ]
 })
 export class PagesModule { }

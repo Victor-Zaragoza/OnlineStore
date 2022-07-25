@@ -19,7 +19,7 @@ export class MyordersComponent implements OnInit, OnDestroy {
 
   constructor(public menucontroller: MenuController,
               public firestorageService: FirestorageService,
-              public firebaseauthService:FirebaseauthService, public firestoreService:FirestoreService) { }
+              public firebaseauthService: FirebaseauthService, public firestoreService: FirestoreService) { }
 
   ngOnInit() {
     this.getNewOrders();
@@ -27,9 +27,9 @@ export class MyordersComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     if (this.newSubs)
-      this.newSubs.unsubscribe();
+      {this.newSubs.unsubscribe();}
     if(this.oldSubs)
-      this.oldSubs.unsubscribe();
+      {this.oldSubs.unsubscribe();}
   }
 
   openMenu(){
@@ -39,9 +39,9 @@ export class MyordersComponent implements OnInit, OnDestroy {
   changeSegment(event: any){
     const option= event.detail.value;
     if(option==='New')
-      this.getNewOrders();
+      {this.getNewOrders();}
     if(option==='Delivered')
-      this.getOldOrders();
+      {this.getOldOrders();}
   }
 
   async getNewOrders(){
@@ -49,7 +49,7 @@ export class MyordersComponent implements OnInit, OnDestroy {
     const path= 'Clients/'+ uid+ '/orders/';
     this.newSubs= this.firestoreService.getCollectionQuery<Order>(path,'status','==','send').subscribe(res =>{
       if(res.length)
-        this.orders=res;
+        {this.orders=res;}
     });
   }
 
@@ -58,7 +58,7 @@ export class MyordersComponent implements OnInit, OnDestroy {
     const path= 'Clients/'+ uid+ '/orders/';
     this.oldSubs= this.firestoreService.getCollectionQuery<Order>(path,'status','==','delivered').subscribe(res =>{
       if(res.length)
-          this.orders=res;
+          {this.orders=res;}
     });
   }
 }

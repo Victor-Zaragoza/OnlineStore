@@ -22,15 +22,15 @@ export class ProfileComponent implements OnInit {
     image: '',
     reference:'',
     location: null
-  }
-  newFile:any;
+  };
+  newFile: any;
   uid= '';
   suscriberUserInfo: Subscription;
   enableLog= false;
 
-  constructor(public menucontroller: MenuController, public firebaseauthService:FirebaseauthService, 
-            public firestorageService:FirestorageService, public firestoreService: FirestoreService, private modalController:ModalController) {
-   
+  constructor(public menucontroller: MenuController, public firebaseauthService: FirebaseauthService,
+            public firestorageService: FirestorageService, public firestoreService: FirestoreService, private modalController: ModalController) {
+
     this.firebaseauthService.stateAuth().subscribe(res =>{
     console.log(res);
       if(res !==null){
@@ -66,7 +66,7 @@ export class ProfileComponent implements OnInit {
     this.menucontroller.toggle('principal');
   }
 
-  async newImage(event:any){
+  async newImage(event: any){
     console.log(event);
     if(event.target.files && event.target.files[0]){
       this.newFile= event.target.files[0];
@@ -83,9 +83,9 @@ export class ProfileComponent implements OnInit {
     const credentials={
       email: this.client.email,
       password: this.client.cellPhone
-    }
+    };
     const resp= await this.firebaseauthService.register(credentials.email, credentials.password).catch(error=>{
-        console.log("error: "+ error);
+        console.log('error: '+ error);
     });
     const uid= await this.firebaseauthService.getUid();
     this.client.uid= uid;
@@ -100,25 +100,25 @@ export class ProfileComponent implements OnInit {
  async saveUser(){
     const path= 'Clients';
     const name= this.client.name;
-  
+
     if(this.newFile !== undefined){
       const res= await this.firestorageService.uploadImage(this.newFile, path, name);
       this.client.image= res;
     }
     this.firestoreService.createDoc(this.client, path, this.client.uid).then(res =>{
-        console.log("guardado con exito");    
+        console.log('guardado con exito');
     }).catch(error =>{
-      console.log("error saveuser");
+      console.log('error saveuser');
     });
-    console.log("guardado");
+    console.log('guardado');
   }
 
-  getUserInfo(uid:string){
+  getUserInfo(uid: string){
      const path= 'Clients';
      this.suscriberUserInfo= this.firestoreService.getDoc<Client>(path,uid).subscribe(res =>{
         // this.client= res as Client;
         if(res!==undefined)
-          this.client= res;
+          {this.client= res;}
      });
   }
 
@@ -128,12 +128,12 @@ export class ProfileComponent implements OnInit {
       password: this.client.cellPhone
     };
     this.firebaseauthService.login(credentials.email, credentials.password).then(res =>{
-      console.log("ingreso con exito");
+      console.log('ingreso con exito');
     });
   }
 
   async addDirection(){
-    const location= this.client.location
+    const location= this.client.location;
     let positionInput={
       lat: 21.87960105,
       lng: -102.303282256171

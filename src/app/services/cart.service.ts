@@ -19,7 +19,7 @@ export class CartService {
   clientSubscriber: Subscription;
 
   constructor(public firebaseauthService: FirebaseauthService, public firestoreservice: FirestoreService,
-              public router:Router) { 
+              public router: Router) {
       this.initCart();
       firebaseauthService.stateAuth().subscribe(res =>{
         console.log(res);
@@ -41,7 +41,7 @@ export class CartService {
         else{
           this.initCart();
         }
-    }); 
+    });
   }
 
   initCart(){
@@ -53,8 +53,8 @@ export class CartService {
       status: 'send',
       date: new Date(),
       score: null
-    }
-    this.order$.next(this.order); 
+    };
+    this.order$.next(this.order);
   }
 
   loadClient(){
@@ -66,27 +66,25 @@ export class CartService {
     });
   }
 
-  getCart(): Observable<Order>{  
+  getCart(): Observable<Order>{
     setTimeout(() => {
       this.order$.next(this.order);
-    }, 100);  
+    }, 100);
     return this.order$.asObservable();
   }
 
   addProduct(product: Product){
     const path= 'Clients/'+ this.uid + '/'+ this.path;
     if(this.uid.length){
-      const elment= this.order.products.find(prod =>{
-        return (prod.product.id === product.id);
-      })
+      const elment= this.order.products.find(prod =>(prod.product.id === product.id));
       if(elment !== undefined){
         elment.amount++;
       }
       else{
         const add: ProductOrder = {
-          product: product,
+          product,
           amount: 1
-        }
+        };
         this.order.products.push(add);
       }
     }
@@ -97,11 +95,11 @@ export class CartService {
     // this.order$.next(this.order);
     console.log('addorder: '+ this.order);
     this.firestoreservice.createDoc(this.order, path, this.uid).then(()=>{
-      console.log("Añadido con exito");
-    }); 
+      console.log('Añadido con exito');
+    });
   }
 
-  removeProduct(product:Product){
+  removeProduct(product: Product){
     const path= 'Clients/'+ this.uid + '/'+ this.path;
     let position=0;
 
@@ -117,11 +115,11 @@ export class CartService {
         }
         console.log('remove product: '+ this.order);
         this.firestoreservice.createDoc(this.order, path, this.uid).then(()=>{
-        console.log("eliminado con exito");
+        console.log('eliminado con exito');
         });
       }
     }
-   
+
   }
 
   clearCart(){

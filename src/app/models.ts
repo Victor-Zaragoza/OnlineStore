@@ -15,8 +15,8 @@ export interface Client{
     image: string;
     reference: string;
     location: {
-        lat:number;
-        lng:number;
+        lat: number;
+        lng: number;
     };
 }
 
@@ -24,7 +24,7 @@ export interface Order{
     id: string;
     client: Client;
     products: ProductOrder[];
-    totalPrice: number; 
+    totalPrice: number;
     status: StatusOrder;
     date: any;
     score: number;

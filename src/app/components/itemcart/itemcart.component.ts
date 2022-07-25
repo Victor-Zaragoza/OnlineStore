@@ -11,7 +11,7 @@ export class ItemcartComponent implements OnInit {
 
   @Input() productOrder: ProductOrder;
   @Input() buttons= true;
-  
+
   constructor(public cartService: CartService) { }
 
   ngOnInit() {}
@@ -21,6 +21,6 @@ export class ItemcartComponent implements OnInit {
   }
 
   removeCart(){
-    this.cartService.removeProduct(this.productOrder.product); 
+    this.cartService.removeProduct(this.productOrder.product);
   }
 }

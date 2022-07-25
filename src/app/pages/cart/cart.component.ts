@@ -21,16 +21,16 @@ export class CartComponent implements OnInit, OnDestroy {
 
   constructor(public menucontroller: MenuController, public firestoreService: FirestoreService,
               public cartService: CartService, public firebaseauthservice: FirebaseauthService) {
-      this.initCart();          
+      this.initCart();
       this.loadOrder();
   }
 
   ngOnInit() {}
 
   ngOnDestroy() {
-    console.log("cart destroy component  ");
+    console.log('cart destroy component  ');
     if(this.cartSubscriber)
-      this.cartSubscriber.unsubscribe();
+      {this.cartSubscriber.unsubscribe();}
   }
 
   openMenu(){
@@ -54,7 +54,7 @@ export class CartComponent implements OnInit, OnDestroy {
       status: 'send',
       date: new Date(),
       score: null
-    }
+    };
   }
 
   getTotal(){
@@ -69,7 +69,7 @@ export class CartComponent implements OnInit, OnDestroy {
     this.amount=0;
     this.order.products.forEach(product =>{
       this.amount+= product.amount;
-    }); 
+    });
   }
 
   async newOrder(){

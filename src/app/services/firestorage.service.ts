@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import {finalize} from 'rxjs/operators'
+import {finalize} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class FirestorageService { 
+export class FirestorageService {
 
   constructor(public storage: AngularFireStorage) { }
 
@@ -13,10 +13,10 @@ export class FirestorageService {
     return new Promise( resolve =>{
       const filePath = path + '/'+ name;
       const ref= this.storage.ref(filePath);
-      const task= ref.put(file); 
+      const task= ref.put(file);
 
       task.snapshotChanges().pipe(
-        finalize(() => { 
+        finalize(() => {
            ref.getDownloadURL().subscribe(res =>{
             const downloadURL =res;
             resolve(downloadURL);

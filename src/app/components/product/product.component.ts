@@ -11,8 +11,8 @@ import { CommentsComponent } from '../comments/comments.component';
 })
 export class ProductComponent implements OnInit {
    @Input() product: Product;
-   
-  constructor(public cartService: CartService, public modalController:ModalController) { }
+
+  constructor(public cartService: CartService, public modalController: ModalController) { }
 
   ngOnInit() {
     // console.log('El producto es: '+ this.product);

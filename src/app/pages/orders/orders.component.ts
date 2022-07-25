@@ -21,7 +21,7 @@ export class OrdersComponent implements OnInit {
 
   constructor(public menucontroller: MenuController,
               public firestorageService: FirestorageService,
-              public firebaseauthService:FirebaseauthService, public firestoreService:FirestoreService) { }
+              public firebaseauthService: FirebaseauthService, public firestoreService: FirestoreService) { }
 
   ngOnInit() {
     this.getNewOrders();
@@ -29,9 +29,9 @@ export class OrdersComponent implements OnInit {
 
   ngOnDestroy(){
     if (this.newSubs)
-      this.newSubs.unsubscribe();
+      {this.newSubs.unsubscribe();}
     if(this.oldSubs)
-      this.oldSubs.unsubscribe();
+      {this.oldSubs.unsubscribe();}
   }
 
   openMenu(){
@@ -44,16 +44,16 @@ export class OrdersComponent implements OnInit {
       this.getNewOrders();
       this.news=true;
     }
-   
+
     if(option==='Delivered'){
       this.getOldOrders();
       this.news=false;
     }
-      
+
   }
 
   async getNewOrders(){
-    console.log("nu")
+    console.log('nu');
     const path= 'orders';
     let startAt= null;
     if(this.ordersN.length){
@@ -62,14 +62,14 @@ export class OrdersComponent implements OnInit {
     this.newSubs= this.firestoreService.getCollectionAll<Order>(path,'status','==','send', startAt).subscribe(res =>{
       if(res.length){
         res.forEach(order => {
-          this.ordersN.push(order)
+          this.ordersN.push(order);
         });
       }
     });
   }
 
   async getOldOrders(){
-    console.log("olds")
+    console.log('olds');
     const path= 'orders';
     let startAt= null;
     if(this.ordersO.length){
@@ -78,7 +78,7 @@ export class OrdersComponent implements OnInit {
     this.newSubs= this.firestoreService.getCollectionAll<Order>(path,'status','==','delivered', startAt).subscribe(res =>{
       if(res.length){
         res.forEach(order => {
-          this.ordersO.push(order)
+          this.ordersO.push(order);
         });
       }
     });
@@ -86,9 +86,9 @@ export class OrdersComponent implements OnInit {
 
   loadMore(){
     if(this.news)
-      this.getNewOrders();
+      {this.getNewOrders();}
     if(this.news==false)
-      this.getOldOrders();  
+      {this.getOldOrders();}
 
   }
 

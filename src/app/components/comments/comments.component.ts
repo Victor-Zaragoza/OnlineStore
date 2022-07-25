@@ -18,8 +18,8 @@ export class CommentsComponent implements OnInit, OnDestroy {
   suscriber: Subscription;
   suscriberUserInfo: Subscription;
 
-  constructor(public modalController:ModalController, public menucontroller:MenuController,
-              public firestoreService:FirestoreService, public firebaseauthService:FirebaseauthService) { }
+  constructor(public modalController: ModalController, public menucontroller: MenuController,
+              public firestoreService: FirestoreService, public firebaseauthService: FirebaseauthService) { }
 
   ngOnInit() {
     console.log('product', this.product);
@@ -28,13 +28,13 @@ export class CommentsComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(){
     if(this.suscriber){
-      console.log("se desuscribe");
+      console.log('se desuscribe');
       this.suscriber.unsubscribe();
     }
   }
 
   openMenu(){
-    console.log("entra")
+    console.log('entra');
     this.menucontroller.toggle('principal');
   }
   closeModal(){
@@ -46,49 +46,49 @@ export class CommentsComponent implements OnInit, OnDestroy {
     if(this.comments.length){
       startAt= this.comments[this.comments.length-1].date;
     }
-    
+
     const path = 'Products/' +  this.product.id + '/comments';
-    console.log('si', path)
+    console.log('si', path);
     this.suscriber=this.firestoreService.getCollectionParts<Comment>(path,2,startAt).subscribe(res=>{
       if(res.length){
         res.forEach(comm=>{
           const exist=this.comments.find(commentExist=>{
-            commentExist.id===comm.id
+            commentExist.id===comm.id;
           });
           if(exist ===undefined)
-            this.comments.push(comm);
+            {this.comments.push(comm);}
         });
       }
 
-    })
+    });
 
   }
 
   async comment(){
     const newcomment= this.varcomment;
     const path= 'Products/'+ this.product.id+ '/comments';
-    const data : Comment={
+    const data: Comment={
         id: this.firestoreService.getId(),
         author: this.firebaseauthService.dataClient.name,
         comment: newcomment,
         date: new Date()
-    }
-          
+    };
+
     this.firestoreService.createDoc(data, path, data.id).then(()=>{
       console.log('comment send');
       this.varcomment='';
-    })
-       
-  
+    });
+
+
   }
 
 
-  
+
 
 }
 
 interface Comment{
-    id: string,
+    id: string;
     author: string;
     comment: string;
     date: any;

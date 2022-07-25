@@ -6,14 +6,14 @@ import { FirestoreService } from './firestore.service';
 @Injectable({
   providedIn: 'root'
 })
-export class FirebaseauthService { 
+export class FirebaseauthService {
 
-  dataClient:Client;
+  dataClient: Client;
 
-  constructor(public auth: AngularFireAuth, public firestoreService:FirestoreService) {
-    this.stateUser();  
+  constructor(public auth: AngularFireAuth, public firestoreService: FirestoreService) {
+    this.stateUser();
     this.getUid();
-      
+
    }
 
   login(email: string, password: string){
@@ -24,16 +24,16 @@ export class FirebaseauthService {
     return this.auth.signOut();
   }
 
-  register(email:string, password: string){
+  register(email: string, password: string){
     return this.auth.createUserWithEmailAndPassword(email,password);
   }
 
   async getUid(){
     const user= await this.auth.currentUser;
     if(user===null)
-      return null;
-    else 
-      return user.uid;
+      {return null;}
+    else
+      {return user.uid;}
   }
 
   stateAuth(){
@@ -49,7 +49,7 @@ export class FirebaseauthService {
       else{
 
       }
-    })
+    });
   }
 
   async getInfoUser(){
@@ -57,7 +57,7 @@ export class FirebaseauthService {
     const path='Clients';
     this.firestoreService.getDoc<Client>(path,uid).subscribe(res =>{
       if(res!==undefined){
-        this.dataClient= res
+        this.dataClient= res;
         console.log(this.dataClient);
       }
     });

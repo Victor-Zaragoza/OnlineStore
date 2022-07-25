@@ -1,0 +1,6 @@
+{
+	"appId": "com.vic.grocerystore",
+	"appName": "grocerystore",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

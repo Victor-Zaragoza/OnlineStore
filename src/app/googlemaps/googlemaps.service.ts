@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 
-declare var google:any;
+declare let google: any;
 
 @Injectable({
   providedIn: 'root'
 })
 export class GooglemapsService {
 
-  apiKey= '' 
+  apiKey= '';
   mapsLoaded=false;
 
   constructor() { }
 
-  init( renderer: any, document:any): Promise<any>{
+  init( renderer: any, document: any): Promise<any>{
     return new Promise((resolve)=>{
       if(this.mapsLoaded){
         console.log('google is preview loaded');
@@ -33,12 +33,12 @@ export class GooglemapsService {
         }
         resolve(true);
         return;
-      }
+      };
       if(this.apiKey){
-        script.src="https://maps.googleapis.com/maps/api/js?key="+this.apiKey+"&callback=initMap&v=weekly";
+        script.src='https://maps.googleapis.com/maps/api/js?key='+this.apiKey+'&callback=initMap&v=weekly';
       }
       else{
-        script.src="https://maps.googleapis.com/maps/api/js?callback=mapInit";
+        script.src='https://maps.googleapis.com/maps/api/js?callback=mapInit';
       }
       renderer.appendChild(document.body,script);
     });

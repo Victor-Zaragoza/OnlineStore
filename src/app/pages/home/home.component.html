@@ -22,5 +22,12 @@
   <div *ngFor="let product of products">
     <app-product [product]="product"></app-product>
   </div>
+
+  <div class="text-center m-5">
+    <ion-button (click)="sendNotification()" class="regular">
+      Send Notification
+    </ion-button>
+  </div>
+
 </ion-content>
 
