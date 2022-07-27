@@ -37,6 +37,14 @@
           <p>Date: {{order.date.seconds*1000 | date}}</p>
         </ion-label>
       </ion-item>
+      <ion-list>
+      <ion-item>
+        <ion-label >Change status: </ion-label>
+        <ion-select (ionChange)="changeStatus(order, $event)" [value]="order.status" okText="OK" cancelText="cancel" interface="popover"  multiple="false" placeholder="Change">
+          <ion-select-option class="regular" *ngFor="let i of status" [value]="i">{{i}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+    </ion-list>
       <app-itemcart *ngFor="let product of order.products" [productOrder]="product" [buttons]="false">
       </app-itemcart>
     </ion-card>

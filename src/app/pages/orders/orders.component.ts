@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuController } from '@ionic/angular';
 import { Subscription } from 'rxjs';
-import { Order } from 'src/app/models';
+import { Order, StatusOrder } from 'src/app/models';
 import { FirebaseauthService } from 'src/app/services/firebaseauth.service';
 import { FirestorageService } from 'src/app/services/firestorage.service';
 import { FirestoreService } from 'src/app/services/firestore.service';
@@ -18,6 +18,7 @@ export class OrdersComponent implements OnInit {
   ordersO: Order[]=[];
   ordersN: Order[]=[];
   news= true;
+  status: StatusOrder[]= ['delivered','on route','read','send'];
 
   constructor(public menucontroller: MenuController,
               public firestorageService: FirestorageService,
@@ -89,6 +90,23 @@ export class OrdersComponent implements OnInit {
       {this.getNewOrders();}
     if(this.news==false)
       {this.getOldOrders();}
+
+  }
+
+  changeStatus(order: Order, event: any){
+    console.log('cambia estado', order);
+    console.log('event-> ', event.detail.value);
+
+    const status= event.detail.value;
+    console.log('evennn', status);
+    const path='Clients/'+order.client.uid+'/orders/';
+    const newDoc= {
+      status
+    };
+    const id=order.id;
+    this.firestoreService.updateDoc(newDoc,path,id).then(()=>{
+      console.log('update success')
+    });
 
   }
 

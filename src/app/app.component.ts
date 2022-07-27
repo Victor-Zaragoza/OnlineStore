@@ -26,19 +26,23 @@ export class AppComponent {
   }
 
   initializeApp() {
-    this.platform.ready().then(() => {
 
-      SplashScreen.hide();
-      StatusBar.setBackgroundColor({color: '#ffffff'});
-      StatusBar.setStyle({
-        style: Style.Light
+    if(this.platform.is('capacitor')){
+      this.platform.ready().then(() => {
+
+        SplashScreen.hide();
+        StatusBar.setBackgroundColor({color: '#ffffff'});
+        StatusBar.setStyle({
+          style: Style.Light
+        });
+  
+        // this.statusBar.styleDefault();
+        // this.splashScreen.hide();
+        // this.getUid();
       });
-
-      // this.statusBar.styleDefault();
-      // this.splashScreen.hide();
-      this.getUid();
-    });
-    // this.getUid();
+    }
+    
+    this.getUid();
   }
 
   getUid() {
