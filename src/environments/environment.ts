@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   firebaseConfig : {
-    apiKey: 'AIzaSyDGuIkE7oYfeAiKoJlF2SZk87a5Uwbg4tM',
+    apiKey: '',
     authDomain: 'grocerystoree.firebaseapp.com',
     projectId: 'grocerystoree',
     storageBucket: 'grocerystoree.appspot.com',
